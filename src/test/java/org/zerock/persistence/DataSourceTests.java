@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,20 +26,21 @@ public class DataSourceTests {
 
 	@Setter(onMethod_ = @Autowired)
 	private SqlSessionFactory sqlSessionFactory;
-	
+
 	@Test
 	public void testMyBatis() {
-		
-		try(SqlSession session = sqlSessionFactory.openSession();
-				Connection con = session.getConnection(); //마이바티스 연결용 코드
-				){
+
+		try (SqlSession session = sqlSessionFactory.openSession();
+				Connection con = session.getConnection(); // 마이바티스
+		) {
 			log.info(session);
 			log.info(con);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
+
 	}
-	
+
 	@Test
 	public void testConnection() {
 
@@ -48,7 +48,7 @@ public class DataSourceTests {
 			log.info(con);
 		} catch (Exception e) {
 			fail(e.getMessage());
-			// import static org.junit.Assert.fail;
+			// import org.junit.internal.runners.statements.Fail;
 		}
 
 	}
